@@ -1,9 +1,9 @@
 # chatspace DB設計
 # 用意するテーブル
 userテーブル_ユーザー情報（名前、アドレス）
-messageデーブル_チャット画面（メッセージ、画像、投稿者名、グループ名）
+messageテーブル_チャット画面（メッセージ、画像、投稿者名、グループ名）
 groupテーブル_グループ名
-users-groupsデーブル_中間デーブル
+users-groupsテーブル_中間テーブル
 
 ## usersテーブル
 |Column|Type|Options|
