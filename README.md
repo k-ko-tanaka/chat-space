@@ -1,24 +1,24 @@
 # chatspace DB設計
 # 用意するテーブル
-userテーブル_ユーザー情報（名前、アドレス）
-messageテーブル_チャット画面（メッセージ、画像、投稿者名、グループ名）
-groupテーブル_グループ名
-users-groupsテーブル_中間テーブル
+- usersテーブル_ユーザー情報（名前、アドレス）
+- messagesテーブル_チャット画面（メッセージ、画像、投稿者名、グループ名）
+- groupsテーブル_グループ名
+- users-groupsテーブル_中間テーブル
 
 ## usersテーブル
 |Column|Type|Options|
 |------|----|-------|
-|user|string|null: false, add_index: true|
+|name|string|null: false, add_index: true|
 |email|string|null: false, unique: true|
 ### Association
-- has_many :groups, through: users-groups
-- has_many :message
-_ has_many :users-groups
+- has_many :groups, through: users_groups
+- has_many :messages
+_ has_many :users_groups
 
 ## messagesテーブル
 |Column|Type|Options|
 |------|----|-------|
-|body|text|null: false|
+|body|text|
 |image|string|
 |user_id|integer|null: false, foreign_key: true|
 |grpup_id|integer|null: false, foreign_key: true|
@@ -29,7 +29,7 @@ _ has_many :users-groups
 ## groupsテーブル
 |Column|Type|Options|
 |------|----|-------|
-|group_name|atring|null: false, unique: true|
+|name|atring|null: false, unique: true|
 ### Association
 - has_many :users_groups
 - has_many :users, through: :users_groups
