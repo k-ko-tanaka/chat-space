@@ -1,0 +1,30 @@
+.chat-main
+  .main-header
+    .main-header__left-box
+      %h2.main-header__left-box__current-group
+        グループ名！
+      %ul.main-header__left-box__member-list 
+        Member：
+        %li.main-header__left-box__member-list__member rei
+    .main-header__edit-btn Edit
+    
+  .messages
+    .message
+      .message__upper-info
+        %p.message__upper-info__talker rei
+        %p.message__upper-info__date 2020/01/18(Sat) 19:53:20
+      %p.message__text メッセージ！
+    .message
+      .message__upper-info
+        %p.message__upper-info__talker rei2
+        %p.message__upper-info__date 2020/01/19(Sun) 14:09:20
+      %p.message__text メッセージ！2
+    
+  .form
+    %form.new_message
+      .input-box
+        %input{type: "text" , class: "input-box__text" , placeholder: "type a message"}
+        %label{class: "input-box__image"}
+          = icon('fas', 'image')
+          %input{type: "file", class: "input-box__image__file"}
+      %input{type: "submit", class: "submit-btn"} 
