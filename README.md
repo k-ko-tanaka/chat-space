@@ -18,10 +18,10 @@ _ has_many :users_groups
 ## messagesテーブル
 |Column|Type|Options|
 |------|----|-------|
-|body|text|
+|content|string|   #修正|body|text| contentに変更  
 |image|string|
 |user_id|integer|null: false, foreign_key: true|
-|grpup_id|integer|null: false, foreign_key: true|
+|group_id|integer|null: false, foreign_key: true|
 ### Association
 - belongs_to :user
 - belongs_to :group
@@ -29,10 +29,10 @@ _ has_many :users_groups
 ## groupsテーブル
 |Column|Type|Options|
 |------|----|-------|
-|name|atring|null: false, unique: true|
+|name|string|null: false, unique: true|
 ### Association
-- has_many :users_groups
-- has_many :users, through: :users_groups
+- has_many :group_users   #修正_users_groups
+- has_many :users, through: :group_users
 - has_many :messages
 
 ## uses_groupsテーブル
