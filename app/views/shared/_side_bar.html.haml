@@ -12,8 +12,8 @@
             = icon('fas', 'cog', class: 'icon') #ユーザー画面実装で追加#
   .groups
     - current_user.groups.each do |group|
-      = link_to "#", class:"group" do
+      = link_to group_messages_path(group), class: 'group' do
         .group__group-name
           = group.name
         .group__latest-message
-          メッセージはまだありません
+          = group.show_last_message

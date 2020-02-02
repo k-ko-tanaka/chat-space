@@ -63,35 +63,37 @@
       }
     }
   }
+
+/* form_forへの書き換えにより、new_messageクラスが自動生成される  */
   .form {
     background-color: #d2d2d2;
     padding: 20px 40px;
-
-    form {
+    .new_message {
       display: flex;
-      .input-box {
-        display: flex;
+      width: 100%;
+      .input-box__text{
+        height: 50px;
         width: 100%;
-        position: relative;
-        &__text {
-          height: 50px;
-          width: 100%;
-          color: $maintextcolor;
-          border-style: none;
-          padding: 0 0px 0 10px;
-        }
-        &__image {
-          position: absolute;
-          top: 10px;
-          right: 10px;
-          cursor: pointer;
-          font-size: 1.3rem;
+        color: $maintextcolor;
+        border-style: none;
+        padding: 0 0px 0 10px;
+        display: flex;
+      }
+        .input-box {
+          display: flex;
+          position: relative;
+          &__image {
+            position: absolute;
+            top: 10px;
+            left: -30px;
+            cursor: pointer;
+            font-size: 1.3rem;
 
-          &__file {
-            display: none;
+            &__hidden {
+              display: none;
+            }
           }
         }
-      }
       .submit-btn {
         width: 100px;
         height: 50px;
