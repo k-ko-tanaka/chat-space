@@ -1,56 +1,64 @@
 $(function(){
+
   var buildHTML = function(message) {
-    if (message.content && message.image) {
-      var html =  `<div class="message" data-message-id=` + message.id + `>` +  //data-idが反映されるようにしている
-        `<div class="message__upper-info">` +
-          `<div class="message__upper-info__talker">` +
-            message.user_name +
-          `</div>` +
-          `<div class="message__upper-info__date">` +
-            message.created_at +
-          `</div>` +
-        `</div>` +
-        `<div class="message__text">` +
-          `<p class="message__text__content">` +
-            message.content +
-          `</p>` +
-          `<img src="` + message.image + `" class="message__text__image" >` +
-        `</div>` +
-      `</div>`
+    if (message.content && message.image) {   //data-idが反映されるようにしている
+
+    var html =  `
+      <div class="message" data-message-id="${message.id}">   
+        <div class="message__upper-info">
+          <div class="message__upper-info__talker">
+            ${message.user_name}
+          </div>
+          <div class="message__upper-info__date">
+            ${message.created_at}
+          </div>
+        </div>
+        <div class="message__text">
+          <p class="message__text__content">
+            ${message.content}
+          </p>
+            <img src="${message.image}" class="message__text__image” >
+        </div>
+      </div>`
+      return html;
 
     } else if (message.content) {   //同様に、data-idが反映されるようにしている
-      var html = `<div class="message" data-message-id=` + message.id + `>` +
-        `<div class="message__upper-info">` +
-          `<div class="message__upper-info__talker">` +
-            message.user_name +
-          `</div>` +
-          `<div class="message__upper-info__date">` +
-            message.created_at +
-          `</div>` +
-        `</div>` +
-        `<div class="message__text">` +
-          `<p class="message__text__content">` +
-            message.content +
-          `</p>` +
-        `</div>` +
-      `</div>`
+      var html = `
+        <div class="message" data-message-id="${message.id}">
+          <div class="message__upper-info">
+            <div class="message__upper-info__talker">
+              ${message.user_name}
+            </div>
+            <div class="message__upper-info__date">
+              ${message.created_at}
+            </div>
+          </div>
+          <div class="message__text">
+            <p class="message__text__content">
+              ${message.content}
+            </p>
+          </div>
+        </div>`
+        return html;
+
     } else if (message.image) {     //同様に、data-idが反映されるようにしている
-      var html = `<div class="message" data-message-id=` + message.id + `>` +
-        `<div class="message__upper-info">` +
-          `<div class="message__upper-info__talker">` +
-            message.user_name +
-          `</div>` +
-          `<div class="message__upper-info__date">` +
-            message.created_at +
-          `</div>` +
-        `</div>` +
-        `<div class="message__text">` +
-          `<img src="` + message.image + `" class="message__text__image" >` +
-        `</div>` +
-      `</div>`
-    };
-    return html;
-  };
+      var html = `
+        <div class="message" data-message-id="${message.id}">
+          <div class="message__upper-info">
+            <div class="message__upper-info__talker">
+              ${message.user_name}
+            </div>
+            <div class="message__upper-info__date">
+              ${message.created_at}
+            </div>
+          </div>
+          <div class="message__text">
+            <img src="${message.image}" class="message__text__image” >
+          </div>
+        </div>`
+        return html;
+    }
+  }
 
   $('#new_message').on('submit', function(e){
     e.preventDefault()
@@ -67,8 +75,8 @@ $(function(){
     .done(function(data){
       var html = buildHTML(data);
       $('.messages').append(html);      
-//      $('form')[0].reset();
-//      $('.messages').animate({ scrollTop: $('.messages')[0].scrollHeight});
+      $('form')[0].reset();
+      $('.messages').animate({ scrollTop: $('.messages')[0].scrollHeight});
     })
     .fail(function() {
       alert("メッセージ送信に失敗しました");
@@ -95,8 +103,8 @@ $(function(){
         $('.messages').append(insertHTML);  //メッセージが入ったHTMLに、入れ物ごと追加
         $('.messages').animate({ scrollTop: $('.messages')[0].scrollHeight});
     })
-    .fail(function() {
-      console.log('error');
+    .fail(function () {
+      alert('自動更新に失敗しました');  //ダメだったらアラートを出す
     });
   };
   if (document.location.href.match(/\/groups\/\d+\/messages/)) {
