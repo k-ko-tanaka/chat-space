@@ -42,6 +42,11 @@ group :development, :test do
   gem 'factory_bot_rails' #追加
   gem 'rails-controller-testing' #追加
   gem 'faker' #追加
+  gem 'capistrano' #AWS 自動デプロイツール
+  gem 'capistrano-rbenv'
+  gem 'capistrano-bundler'
+  gem 'capistrano-rails'
+  gem 'capistrano3-unicorn'
 end
 
 group :development do
