@@ -33,7 +33,10 @@
       border: solid 1px $mainbtncolor;
       position: absolute;
       right: 40px;
-      color: $mainbtncolor;
+      a {
+        color: $mainbtncolor;
+        text-decoration: none;
+      }
     }
   }
   .messages {

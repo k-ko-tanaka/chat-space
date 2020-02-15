@@ -2,9 +2,8 @@ $(function(){
 
   var buildHTML = function(message) {
     if (message.content && message.image) {   //data-idが反映されるようにしている
-
-      var html =  `
-        <div class="message" data-message-id="${message.id}">   
+      var html =
+       `<div class="message" data-message-id="${message.id}">   
           <div class="message__upper-info">
             <div class="message__upper-info__talker">
               ${message.user_name}
@@ -18,11 +17,11 @@ $(function(){
               ${message.content}
             </p>
           </div>  
-          <img src="${message.image}" class="message__text__image” >
+          <img src="${message.image}" class="message__text__image" >
         </div>`
       return html;
 
-    } else if (message.content) {   //同様に、data-idが反映されるようにしている
+    } else if (message.content) {
       var html =
        `<div class="message" data-message-id="${message.id}">
           <div class="message__upper-info">
@@ -41,7 +40,7 @@ $(function(){
         </div>`
       return html;
 
-    } else if (message.image) {     //同様に、data-idが反映されるようにしている
+    } else if (message.image) {
       var html = 
        `<div class="message" data-message-id="${message.id}">
           <div class="message__upper-info">
@@ -53,7 +52,7 @@ $(function(){
             </div>
           </div>
           <div class="message__text">
-          <img src="${message.image}" class="message__text__image” >
+          <img src="${message.image}" class="message__text__image" >
           </div>
         </div>`
       return html;
@@ -67,7 +66,7 @@ $(function(){
     $.ajax({
       url: url,  //同期通信でいう『パス』
       type: "POST",  //同期通信でいう『HTTPメソッド』
-      data: formData,  
+      data: formData,
       dataType: 'json',
       processData: false,
       contentType: false
@@ -82,11 +81,11 @@ $(function(){
       alert("メッセージ送信に失敗しました");
     })
     .always(function(data){
-      $('.submit-btn').prop('disabled', false); //ここで解除している
+      $('.submit-btn').prop('disabled', false);
     })
   });
 
-  // 自動更新はここから。 
+  // 自動更新
   var reloadMessages = function() {  //カスタムデータ属性を利用し、ブラウザに表示されている最新メッセージのidを取得
     last_message_id = $('.message:last').data("message-id");
     $.ajax({  //ルーティングで設定した通り/groups/id番号/api/messagesとなるよう文字列を書く
@@ -104,7 +103,7 @@ $(function(){
       $('.messages').animate({ scrollTop: $('.messages')[0].scrollHeight});
     })
     .fail(function () {
-      alert('自動更新に失敗しました');  //ダメだったらアラートを出す
+      alert('自動更新に失敗しました');
     });
   };
   if (document.location.href.match(/\/groups\/\d+\/messages/)) {
