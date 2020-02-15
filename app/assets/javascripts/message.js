@@ -3,28 +3,28 @@ $(function(){
   var buildHTML = function(message) {
     if (message.content && message.image) {   //data-idが反映されるようにしている
 
-    var html =  `
-      <div class="message" data-message-id="${message.id}">   
-        <div class="message__upper-info">
-          <div class="message__upper-info__talker">
-            ${message.user_name}
+      var html =  `
+        <div class="message" data-message-id="${message.id}">   
+          <div class="message__upper-info">
+            <div class="message__upper-info__talker">
+              ${message.user_name}
+            </div>
+            <div class="message__upper-info__date">
+              ${message.created_at}
+            </div>
           </div>
-          <div class="message__upper-info__date">
-            ${message.created_at}
-          </div>
-        </div>
-        <div class="message__text">
-          <p class="message__text__content">
-            ${message.content}
-          </p>
-            <img src="${message.image}" class="message__text__image” >
-        </div>
-      </div>`
+          <div class="message__text">
+            <p class="message__text__content">
+              ${message.content}
+            </p>
+          </div>  
+          <img src="${message.image}" class="message__text__image” >
+        </div>`
       return html;
 
     } else if (message.content) {   //同様に、data-idが反映されるようにしている
-      var html = `
-        <div class="message" data-message-id="${message.id}">
+      var html =
+       `<div class="message" data-message-id="${message.id}">
           <div class="message__upper-info">
             <div class="message__upper-info__talker">
               ${message.user_name}
@@ -39,11 +39,11 @@ $(function(){
             </p>
           </div>
         </div>`
-        return html;
+      return html;
 
     } else if (message.image) {     //同様に、data-idが反映されるようにしている
-      var html = `
-        <div class="message" data-message-id="${message.id}">
+      var html = 
+       `<div class="message" data-message-id="${message.id}">
           <div class="message__upper-info">
             <div class="message__upper-info__talker">
               ${message.user_name}
@@ -53,11 +53,11 @@ $(function(){
             </div>
           </div>
           <div class="message__text">
-            <img src="${message.image}" class="message__text__image” >
+          <img src="${message.image}" class="message__text__image” >
           </div>
         </div>`
-        return html;
-    }
+      return html;
+    };
   }
 
   $('#new_message').on('submit', function(e){
@@ -66,7 +66,7 @@ $(function(){
     var url = $(this).attr('action');
     $.ajax({
       url: url,  //同期通信でいう『パス』
-      type: 'POST',  //同期通信でいう『HTTPメソッド』
+      type: "POST",  //同期通信でいう『HTTPメソッド』
       data: formData,  
       dataType: 'json',
       processData: false,
@@ -84,7 +84,7 @@ $(function(){
     .always(function(data){
       $('.submit-btn').prop('disabled', false); //ここで解除している
     })
-  })
+  });
 
   // 自動更新はここから。 
   var reloadMessages = function() {  //カスタムデータ属性を利用し、ブラウザに表示されている最新メッセージのidを取得
@@ -96,18 +96,18 @@ $(function(){
       data: {id: last_message_id}
     })
     .done(function(messages) {
-        var insertHTML = '';    //追加するHTMLの入れ物を作る
-        $.each(messages, function(i, message) {  //配列messagesの中身一つ一つを取り出し、HTMLに変換したものを入れ物に足し合わせる
-          insertHTML += buildHTML(message)
-        });
-        $('.messages').append(insertHTML);  //メッセージが入ったHTMLに、入れ物ごと追加
-        $('.messages').animate({ scrollTop: $('.messages')[0].scrollHeight});
+      var insertHTML = '';    //追加するHTMLの入れ物を作る
+      $.each(messages, function(i, message) {  //配列messagesの中身一つ一つを取り出し、HTMLに変換したものを入れ物に足し合わせる
+        insertHTML += buildHTML(message)
+      });
+      $('.messages').append(insertHTML);  //メッセージが入ったHTMLに、入れ物ごと追加
+      $('.messages').animate({ scrollTop: $('.messages')[0].scrollHeight});
     })
     .fail(function () {
       alert('自動更新に失敗しました');  //ダメだったらアラートを出す
     });
   };
   if (document.location.href.match(/\/groups\/\d+\/messages/)) {
-    setInterval(reloadMessages, 7000);
+    setInterval(reloadMessages, 7000); 
   }
 });
